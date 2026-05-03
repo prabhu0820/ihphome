@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IHP AI Project Intelligence Hub</title>
+  <style>
+    :root {
+      --primary: #006c67;
+      --primary-dark: #004b49;
+      --accent: #00a99d;
+      --bg: #f4f8fb;
+      --text: #152033;
+      --muted: #64748b;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, Arial, sans-serif;
+      background: radial-gradient(circle at top left, #d8fff8 0%, #f4f8fb 42%, #eef2ff 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 26px 7vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--primary), #1ec8b5);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 900;
+      box-shadow: 0 10px 25px rgba(0, 108, 103, 0.25);
+    }
+
+    .brand h2 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: -0.4px;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .contact-top {
+      text-align: right;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .hero {
+      padding: 48px 7vw 28px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 34px;
+      padding: 46px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #e6fffb;
+      color: var(--primary-dark);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 5vw, 68px);
+      line-height: 0.98;
+      margin: 0 0 20px;
+      letter-spacing: -2px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--muted);
+      margin: 0 0 30px;
+      max-width: 760px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      text-decoration: none;
+      border-radius: 16px;
+      padding: 14px 18px;
+      font-weight: 800;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 12px 24px rgba(0, 108, 103, 0.22);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--primary-dark);
+      border: 1px solid var(--border);
+    }
+
+    .status-panel {
+      background: #0f172a;
+      color: white;
+      border-radius: 34px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .status-panel h3 {
+      margin: 0 0 16px;
+      font-size: 18px;
+    }
+
+    .pulse-row {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 14px 0;
+      font-size: 14px;
+    }
+
+    .pulse-row span:last-child {
+      color: #99f6e4;
+      font-weight: 800;
+    }
+
+    .section {
+      padding: 26px 7vw 58px;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 18px;
+      gap: 18px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 30px;
+      letter-spacing: -0.8px;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.5;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .tile {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 26px;
+      padding: 24px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+      text-decoration: none;
+      color: var(--text);
+      min-height: 210px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .tile:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 42px rgba(15, 23, 42, 0.14);
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: #e6fffb;
+      font-size: 24px;
+      margin-bottom: 18px;
+    }
+
+    .tile h3 {
+      margin: 0 0 8px;
+      font-size: 21px;
+    }
+
+    .tile p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .tile .open {
+      margin-top: 22px;
+      color: var(--primary);
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    footer {
+      margin: 0 7vw 28px;
+      padding: 22px 0 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      header, .hero, .section { padding-left: 22px; padding-right: 22px; }
+      .hero { grid-template-columns: 1fr; padding-top: 24px; }
+      .grid { grid-template-columns: 1fr; }
+      .section-title { align-items: start; flex-direction: column; }
+      .contact-top { display: none; }
+      footer { margin-left: 22px; margin-right: 22px; flex-direction: column; }
+      .hero-card { padding: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">IHP</div>
+      <div>
+        <h2>In-House Projects</h2>
+        <span>AI Project Intelligence Hub</span>
+      </div>
+    </div>
+    <div class="contact-top">
+      Campus & Community | Facilities Management<br />
+      Contact: ihp-projects@kaust.edu.sa | Ext: XXXX
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">● Intelligent Project Delivery</div>
+        <h1>Welcome to the IHP Digital Hub</h1>
+        <p>
+          A single entry point for project performance, lab equipment reporting, AI-powered project status assistance, and executive dashboards. Built to transform project information into faster decisions and clearer stakeholder visibility.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://prabhu0820.github.io/ihp-ai-demo/" target="_blank">🚀 Open AI Assistant</a>
+          <a class="btn btn-secondary" href="#tools">View Digital Tools</a>
+        </div>
+      </div>
+
+      <div class="status-panel">
+        <h3>Live Hub Snapshot</h3>
+        <div class="pulse-row"><span>AI Assistant</span><span>Active</span></div>
+        <div class="pulse-row"><span>Quarterly KPI Dashboard</span><span>Ready</span></div>
+        <div class="pulse-row"><span>Lab Equipment Report</span><span>Available</span></div>
+        <div class="pulse-row"><span>AI Intelligence Hub</span><span>Demo</span></div>
+        <div class="pulse-row"><span>Stakeholder Access</span><span>QR Enabled</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="tools">
+      <div class="section-title">
+        <h2>Digital Tools & Reports</h2>
+        <p>Use the links below to access IHP dashboards, AI demos, and reporting pages. Replace the placeholder links with your actual GitHub Pages URLs.</p>
+      </div>
+
+      <div class="grid">
+        <a class="tile" href="https://prabhu0820.github.io/ihp-ai-demo-quarterly/" target="_blank">
+          <div>
+            <div class="icon">📊</div>
+            <h3>Quarterly KPI Page</h3>
+            <p>Executive view of quarterly performance, delivery trends, savings, completion metrics, and customer-focused KPIs.</p>
+          </div>
+          <div class="open">Open dashboard →</div>
+        </a>
+
+        <a class="tile" href="#" target="_blank">
+          <div>
+            <div class="icon">🔬</div>
+            <h3>Lab Equipment Report</h3>
+            <p>Installation, commissioning, equipment assessment, pending actions, completed ICRs, and lab readiness reporting.</p>
+          </div>
+          <div class="open">Add link →</div>
+        </a>
+
+        <a class="tile" href="https://prabhu0820.github.io/ihp-ai-demo/" target="_blank">
+          <div>
+            <div class="icon">🤖</div>
+            <h3>AI Project Assistant</h3>
+            <p>Client-facing chatbot demo for project status, readiness score, pending approvals, blockers, and next actions.</p>
+          </div>
+          <div class="open">Launch assistant →</div>
+        </a>
+
+        <a class="tile" href="#" target="_blank">
+          <div>
+            <div class="icon">🧠</div>
+            <h3>AI Intelligence Hub</h3>
+            <p>MCP, RAG, and AI agent concepts for project readiness, risk analysis, project summaries, and decision intelligence.</p>
+          </div>
+          <div class="open">Add link →</div>
+        </a>
+
+        <a class="tile" href="#" target="_blank">
+          <div>
+            <div class="icon">🏗️</div>
+            <h3>Project Portfolio View</h3>
+            <p>Portfolio-level view of ongoing projects, project stage, trade involvement, delays, priorities, and execution status.</p>
+          </div>
+          <div class="open">Add link →</div>
+        </a>
+
+        <a class="tile" href="mailto:ihp-projects@kaust.edu.sa">
+          <div>
+            <div class="icon">✉️</div>
+            <h3>Contact IHP</h3>
+            <p>Contact the IHP team for project updates, requests, clarifications, feedback, or support with project information.</p>
+          </div>
+          <div class="open">Send email →</div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>© 2026 In-House Projects | Campus & Community | KAUST</div>
+    <div>Built as a demonstration of AI-enhanced project management capabilities.</div>
+  </footer>
+</body>
+</html>
